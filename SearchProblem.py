@@ -20,7 +20,7 @@ class SearchProblem():
                 if self.grid[x][y] == 2:
                     return (x, y, self.grid, self.grid.max())
     def createStateSpace(self):
-        return StateSpace.create(grid, self.initalState, self.operators)
+        return StateSpace.create(self.grid, self.initalState, self.operators)
 
 
     def goalTestFunction(self, state):

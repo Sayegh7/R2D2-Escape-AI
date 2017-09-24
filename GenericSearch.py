@@ -1,2 +1,4 @@
-def Search(grid, strategy, visualize):
+import SearchNode
+def GenericSearch(grid, problem, strategy, visualize):
+
     return

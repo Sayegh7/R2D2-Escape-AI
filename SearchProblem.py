@@ -13,7 +13,7 @@ class SearchProblem():
         self.grid = grid
         self.initalState = self.createInitialState()
         self.operators = ['Up', 'Down', 'Left', 'Right']
-        self.stateSpace =   self.createStateSpace()
+        # self.stateSpace =   self.createStateSpace()
     def createInitialState(self):
         for x in range(len(self.grid)):
             for y in range(len(self.grid)):
@@ -23,8 +23,6 @@ class SearchProblem():
         return StateSpace.create(self.grid, self.initalState, self.operators)
 
 
-    def goalTestFunction(self, state):
-        state.gridsum == 0
 
 def createSearchProblem(grid):
     return SearchProblem(grid)

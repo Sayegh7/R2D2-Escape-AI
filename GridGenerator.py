@@ -6,7 +6,7 @@ grid = np.zeros((m, m))
 # ROCKS = 1, PADS = -1, R2D2 = 2, TELEPORTER = -2, FULL PAD = -3
 
 def GenGrid():
-    rocks = np.random.randint(m)
+    rocks = 2#np.random.randint(m)
     for n in range(rocks):
         placeRock()
         placePad()
@@ -29,6 +29,8 @@ def placeItem(itemCode):
     while placed == False:
         x = np.random.randint(m-1)
         y = np.random.randint(m-1)
+        if y == 0 or y == m-1 or x == 0 or x == m-1:
+            continue
         if grid[x][y] != 0:
             continue
         else:

@@ -1,4 +1,8 @@
 from PIL import Image
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel
+from PyQt5.QtGui import QIcon, QPixmap, QImage
+from PyQt5 import QtCore
+# from PIL.ImageQt import ImageQt
 
 
 def renderCell(img, x, y, background):
@@ -23,10 +27,36 @@ def renderGrid(grid, m):
                 renderCell(rockImg, x, y, background)
             if grid[x][y] == 2:
                 renderCell(r2d2Img, x, y, background)
-                print 'R2D2 is at', x, y
+                print('R2D2 is at', x, y)
             if grid[x][y] == -2:
                 renderCell(teleporterImg, x, y, background)
             if grid[x][y] == 0:
                 renderCell(emptyCellImg, x, y, background)
-    background.save('assets/out.png')
-    background.show()
+    # qimg = toQImage(background)
+    # print (qimg)
+    # qim = ImageQt(background)
+    # pix = QtGui.QPixmap.fromImage(qim)
+
+    background.save('out.png')
+    # background.show()
+
+
+def toQImage(im, copy=False):
+    if im is None:
+        return QImage()
+
+    if im.dtype == np.uint8:
+        if len(im.shape) == 2:
+            qim = QImage(im.data, im.shape[1], im.shape[0], im.strides[0], QImage.Format_Indexed8)
+            qim.setColorTable(gray_color_table)
+            return qim.copy() if copy else qim
+
+        elif len(im.shape) == 3:
+            if im.shape[2] == 3:
+                qim = QImage(im.data, im.shape[1], im.shape[0], im.strides[0], QImage.Format_RGB888);
+                return qim.copy() if copy else qim
+            elif im.shape[2] == 4:
+                qim = QImage(im.data, im.shape[1], im.shape[0], im.strides[0], QImage.Format_ARGB32);
+                return qim.copy() if copy else qim
+
+    raise NotImplementedException

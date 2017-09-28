@@ -5,19 +5,17 @@ import GenericSearch
 
 
 def run(gui):
-    while True:
         grid = GridGenerator.GenGrid()
         problem = SearchProblem.createSearchProblem(grid)
         result_node = GenericSearch.Search(problem, "BFS", False, gui);
-        print(result_node)
         if result_node != None:
             path = []
-            print('here')
-            move = 'nothing'
-            while move != None:
-                print(move)
-                move = result_node.operator
-                path.append(move)
-            print(path)
+            path.append(result_node.operator)
+            parent = result_node.parent
+            while parent != None:
+                if parent.operator != None:
+                    path.append(parent.operator)
+                parent = parent.parent
+            print("Solution", path)
         else:
-            continue
+            print("Found no solution")

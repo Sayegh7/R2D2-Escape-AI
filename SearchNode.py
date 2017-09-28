@@ -7,7 +7,6 @@ class State():
         self.grid = grid
         self.max = max
 
-
 class SearchNode():
     def __init__(self, state, cost, depth, parent, operator):
         self.state = state
@@ -15,7 +14,6 @@ class SearchNode():
         self.depth = depth
         self.parent = parent
         self.operator = operator
-        return
     def expand(self, operators):
         childNodes = []
         for operator in operators:
@@ -30,15 +28,12 @@ class SearchNode():
 def createNode(state, cost, depth, parent, operator):
     return SearchNode(state, cost, depth, parent, operator)
 
-
-
 def nextState(previousState, operator):
     newGrid = np.copy(previousState.grid)
     gridCopy = np.copy(newGrid)
     newX = previousState.x
     newY = previousState.y
     newMax = previousState.max
-
 
     if operator == "Up":
         # If not at top edge
@@ -60,7 +55,7 @@ def nextState(previousState, operator):
 
             # Pad in the way
             if (previousState.grid[previousState.x][previousState.y-1]) == -1 or (previousState.grid[previousState.x][previousState.y-1]) == -3:
-                return previousState
+                return State(previousState.x, previousState.y, previousState.grid, previousState.max)
             # No obstacles in the way
             if (previousState.grid[previousState.x][previousState.y-1]) == 0:
                 # Move up
@@ -73,7 +68,7 @@ def nextState(previousState, operator):
                 # Check if rock is at the top
                 if previousState.y == 1:
                     # Do nothing
-                    return previousState
+                    return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                 else:
                     # Empty above rock
                     if (previousState.grid[previousState.x][previousState.y-2]) == 0:
@@ -86,7 +81,7 @@ def nextState(previousState, operator):
                     # Rock or teleporter or full pad above rock
                     if (previousState.grid[previousState.x][previousState.y-2]) == 1 or (previousState.grid[previousState.x][previousState.y-2]) == -2 or (previousState.grid[previousState.x][previousState.y-2]) == -3 :
                         # Do nothing
-                        return previousState
+                        return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                     # Pad above rock
                     if (previousState.grid[previousState.x][previousState.y-2]) == -1:
                         # Move rock onto pad
@@ -98,7 +93,7 @@ def nextState(previousState, operator):
         # At Top edge
         else:
             # Do nothing
-            return previousState
+            return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
 
 
@@ -118,11 +113,11 @@ def nextState(previousState, operator):
                     return State(newX, newY, newGrid, 0)
                 else:
                     # Not all pads are active. Do nothing.
-                    return previousState
+                    return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
             # Pad in the way
             if (previousState.grid[previousState.x][previousState.y+1]) == -1 or (previousState.grid[previousState.x][previousState.y+1]) == -3:
-                return previousState
+                return State(previousState.x, previousState.y, previousState.grid, previousState.max)
             # No obstacles in the way
             if (previousState.grid[previousState.x][previousState.y+1]) == 0:
                 # Move up
@@ -135,7 +130,7 @@ def nextState(previousState, operator):
                 # Check if rock is at the top
                 if previousState.y == len(newGrid)-2:
                     # Do nothing
-                    return previousState
+                    return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                 else:
                     # Empty above rock
                     if (previousState.grid[previousState.x][previousState.y+2]) == 0:
@@ -148,7 +143,7 @@ def nextState(previousState, operator):
                     # Rock or teleporter or full pad above rock
                     if (previousState.grid[previousState.x][previousState.y+2]) == 1 or (previousState.grid[previousState.x][previousState.y+2]) == -2 or (previousState.grid[previousState.x][previousState.y+2]) == -3 :
                         # Do nothing
-                        return previousState
+                        return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                     # Pad above rock
                     if (previousState.grid[previousState.x][previousState.y+2]) == -1:
                         # Move rock onto pad
@@ -160,7 +155,7 @@ def nextState(previousState, operator):
         # At Top edge
         else:
             # Do nothing
-            return previousState
+            return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
 
     if operator == "Right":
@@ -179,11 +174,11 @@ def nextState(previousState, operator):
                     return State(newX, newY, newGrid, 0)
                 else:
                     # Not all pads are active. Do nothing.
-                    return previousState
+                    return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
             # Pad in the way
             if (previousState.grid[previousState.x+1][previousState.y]) == -1 or (previousState.grid[previousState.x+1][previousState.y]) == -3:
-                return previousState
+                return State(previousState.x, previousState.y, previousState.grid, previousState.max)
             # No obstacles in the way
             if (previousState.grid[previousState.x+1][previousState.y]) == 0:
                 # Move up
@@ -196,7 +191,7 @@ def nextState(previousState, operator):
                 # Check if rock is at the top
                 if previousState.x == len(newGrid)-2:
                     # Do nothing
-                    return previousState
+                    return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                 else:
                     # Empty above rock
                     if (previousState.grid[previousState.x+2][previousState.y]) == 0:
@@ -209,7 +204,7 @@ def nextState(previousState, operator):
                     # Rock or teleporter or full pad above rock
                     if (previousState.grid[previousState.x+2][previousState.y]) == 1 or (previousState.grid[previousState.x+2][previousState.y]) == -2 or (previousState.grid[previousState.x+2][previousState.y]) == -3 :
                         # Do nothing
-                        return previousState
+                        return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                     # Pad above rock
                     if (previousState.grid[previousState.x+2][previousState.y]) == -1:
                         # Move rock onto pad
@@ -221,7 +216,7 @@ def nextState(previousState, operator):
         # At Top edge
         else:
             # Do nothing
-            return previousState
+            return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
 
 
@@ -243,11 +238,11 @@ def nextState(previousState, operator):
                     return State(newX, newY, newGrid, 0)
                 else:
                     # Not all pads are active. Do nothing.
-                    return previousState
+                    return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
             # Pad in the way
             if (previousState.grid[previousState.x-1][previousState.y]) == -1 or (previousState.grid[previousState.x-1][previousState.y]) == -3:
-                return previousState
+                return State(previousState.x, previousState.y, previousState.grid, previousState.max)
             # No obstacles in the way
             if (previousState.grid[previousState.x-1][previousState.y]) == 0:
                 # Move up
@@ -260,7 +255,7 @@ def nextState(previousState, operator):
                 # Check if rock is at the top
                 if previousState.x == 1:
                     # Do nothing
-                    return previousState
+                    return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                 else:
                     # Empty above rock
                     if (previousState.grid[previousState.x-2][previousState.y]) == 0:
@@ -273,7 +268,7 @@ def nextState(previousState, operator):
                     # Rock or teleporter or full pad above rock
                     if (previousState.grid[previousState.x-2][previousState.y]) == 1 or (previousState.grid[previousState.x-2][previousState.y]) == -2 or (previousState.grid[previousState.x-2][previousState.y]) == -3 :
                         # Do nothing
-                        return previousState
+                        return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                     # Pad above rock
                     if (previousState.grid[previousState.x-2][previousState.y]) == -1:
                         # Move rock onto pad
@@ -285,4 +280,4 @@ def nextState(previousState, operator):
         # At Top edge
         else:
             # Do nothing
-            return previousState
+            return State(previousState.x, previousState.y, previousState.grid, previousState.max)

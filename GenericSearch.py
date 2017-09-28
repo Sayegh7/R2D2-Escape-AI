@@ -1,9 +1,8 @@
 import SearchNode
 import SearchProblem
-import queue as queue
+import queue
 import Visualizer as v
 import numpy as np
-import time
 def Search(problem, strategy, visualize, gui):
     global visitedNodes
     global rockCount
@@ -16,13 +15,13 @@ def Search(problem, strategy, visualize, gui):
     nodes.put(rootNode)
     while nodes.empty() == False:
         node = nodes.get()
-        print (node.state[0],node.state[1])
-        v.renderGrid(node.state[2], 10)
+        # print (node.state[0],node.state[1])
+        v.renderGrid(node.state[2], 5)
         gui.refresh()
         if np.count_nonzero(y==1) != rockCount:
             visitedNodes = []
         visitedNodes.append((node.state[0], node.state[1], node.operator))
-        print (node.state[0], node.state[1])
+        # print (node.state[0], node.state[1])
         if node.state[3] == 0: # GOAAAAAALLL
             return node
         childNodes = node.expand(problem.operators)

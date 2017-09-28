@@ -27,7 +27,7 @@ def renderGrid(grid, m):
                 renderCell(rockImg, x, y, background)
             if grid[x][y] == 2:
                 renderCell(r2d2Img, x, y, background)
-                print('R2D2 is at', x, y)
+                # print('R2D2 is at', x, y)
             if grid[x][y] == -2:
                 renderCell(teleporterImg, x, y, background)
             if grid[x][y] == 0:

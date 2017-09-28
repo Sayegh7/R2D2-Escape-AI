@@ -56,7 +56,7 @@ def nextState(previousState, operator):
                     return State(newX, newY, newGrid, 0)
                 else:
                     # Not all pads are active. Do nothing.
-                    return previousState
+                    return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
             # Pad in the way
             if (previousState.grid[previousState.x][previousState.y-1]) == -1 or (previousState.grid[previousState.x][previousState.y-1]) == -3:

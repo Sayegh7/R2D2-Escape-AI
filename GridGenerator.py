@@ -1,12 +1,12 @@
 import numpy as np
 import Visualizer as v
 
-m = 10
+m = 5
 grid = np.zeros((m, m))
 # ROCKS = 1, PADS = -1, R2D2 = 2, TELEPORTER = -2, FULL PAD = -3
 
 def GenGrid():
-    rocks = 2#np.random.randint(m)
+    rocks = 0#np.random.randint(m)
     for n in range(rocks):
         placeRock()
         placePad()

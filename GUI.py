@@ -21,8 +21,8 @@ class App(QWidget):
     def __init__(self):
         super(App, self).__init__()
         self.title = 'R2D2 Escape'
-        self.left = 10
-        self.top = 10
+        self.left = 20
+        self.top = 20
         self.width = 1000
         self.height = 1000
         self.initUI()

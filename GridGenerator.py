@@ -12,7 +12,7 @@ def GenGrid():
         placePad()
     placeTeleporter()
     placeR2D2()
-    v.renderGrid(grid, m)
+    v.renderGrid(grid, m, True)
     return grid
 
 def placeRock():

@@ -19,3 +19,4 @@ def run(gui):
             print("Solution", path)
         else:
             print("Found no solution")
+# run(None)

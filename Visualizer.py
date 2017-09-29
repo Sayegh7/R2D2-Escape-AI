@@ -11,7 +11,7 @@ def renderCell(img, x, y, background):
     offset = (50*x, 50*y)
     background.paste(img, offset)
 
-def renderGrid(grid, m):
+def renderGrid(grid, m, initial=False):
     background = Image.new('RGBA', (m*50, m*50), (255, 255, 255, 255))
     emptyCellImg = Image.open('assets/box.png', 'r')
     rockImg = Image.open('assets/rock.png', 'r')
@@ -36,8 +36,11 @@ def renderGrid(grid, m):
     # print (qimg)
     # qim = ImageQt(background)
     # pix = QtGui.QPixmap.fromImage(qim)
+    if initial == True:
+        background.save('initial.png')
 
     background.save('out.png')
+
     # background.show()
 
 

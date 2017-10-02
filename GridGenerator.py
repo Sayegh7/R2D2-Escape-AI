@@ -6,7 +6,7 @@ grid = np.zeros((m, m))
 # ROCKS = 1, PADS = -1, R2D2 = 2, TELEPORTER = -2, FULL PAD = -3
 
 def GenGrid():
-    rocks = 2#np.random.randint(m)
+    rocks = 2 #np.random.randint(m)
     for n in range(rocks):
         placeRock()
         placePad()
@@ -14,6 +14,7 @@ def GenGrid():
     placeR2D2()
     v.renderGrid(grid, m, True)
     return grid
+
 
 def placeRock():
     placeItem(1)

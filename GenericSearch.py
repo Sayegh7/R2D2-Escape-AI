@@ -8,13 +8,8 @@ import tracking as tracker
 def Search(problem, strategy, visualize, gui):
     global nodes
     global visitedStates
-    global rockCount
     visitedStates = []
     nodes = queue.Queue()
-    '''
-    rockCount = 0
-    rockCount = np.count_nonzero(grid==1)
-    '''
     rootNode = SearchNode.createNode(SearchNode.State(problem.initialState.x, problem.initialState.y, problem.initialState.grid, problem.initialState.max), 0, 0, None, None)
     nodes.put(rootNode)
     while nodes.empty() == False:
@@ -23,17 +18,11 @@ def Search(problem, strategy, visualize, gui):
         node = nodes.get()
         if visualize == True:
             v.refresh(node.state, gui)
-        '''
-        if np.count_nonzero(node.state[2]==1) != rockCount:
-            nodes = queue.Queue()
-            rockCount = np.count_nonzero(node.state[2]==1)
-            nodes.put(node)
-            continue;
-        '''
         if problem.goalTestFunction(node.state): #GOAL
             return node
         childNodes = node.expand(problem.operators)
         for node in childNodes:
+            print(tracker.stateExist(node.state,visitedStates))
             if (tracker.stateExist(node.state,visitedStates)==False):
                 newNodes.put(node)
                 visitedStates.append(node.state)

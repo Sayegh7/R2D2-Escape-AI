@@ -18,7 +18,7 @@ class SearchNode():
         childNodes = []
         for operator in operators:
             newState = nextState(self.state, operator);
-            newNode = SearchNode(self.state, self.cost+1, self.depth+1, self, operator)
+            newNode = SearchNode(newState, self.cost+1, self.depth+1, self, operator)
             childNodes.append(newNode)
         return childNodes
 

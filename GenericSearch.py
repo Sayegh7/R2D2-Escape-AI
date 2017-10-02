@@ -6,6 +6,8 @@ import tracking as tracker
 import operator
 from State import State
 from SearchNode import SearchNode
+
+max_depth = 9999999
 def Search(problem, strategy, visualize, gui=None):
     global nodes
     global visitedStates
@@ -18,7 +20,7 @@ def Search(problem, strategy, visualize, gui=None):
         node = nodes.get()
         if visualize == True:
             v.refresh(node.state, gui)
-        if problem.goalTestFunction(node.state)or node.depth>max_depth: #GOAL
+        if problem.goalTestFunction(node.state):#GOAL
             return node
         childNodes = node.expand(problem.operators)
         for node in childNodes:
@@ -30,6 +32,7 @@ def Search(problem, strategy, visualize, gui=None):
 
 def Queueingfunction(newNodes,strategy):
     global nodes
+    global max_depth
     if strategy == "BFS":
         while not newNodes.empty():
             nodes.put(newNodes.get())
@@ -47,3 +50,10 @@ def Queueingfunction(newNodes,strategy):
        templist.sort(key=operator.attrgetter('depth'))
        for node in templist:
            nodes.put(node)
+    if strategy == "ID":
+                  while not nodes.empty():
+                      newNodes.put(nodes.get())
+                  while not newNodes.empty():
+                      tempNode = newNodes.get()
+                      if tempNode.depth<=max_depth:
+                          nodes.put(tempNode)

@@ -17,7 +17,15 @@ def run(gui):
 
         problem = SearchProblem.createSearchProblem(initialState, operators, goalTestFunction)
 
-        result_node = GenericSearch.Search(problem, "UC", True, gui=gui);
+        # result_node = GenericSearch.Search(problem, "UC", True, gui=gui);
+        for depth in range(99999999):
+            print ('the actual depth',depth)
+            GenericSearch.max_depth = depth
+            print(GenericSearch.max_depth)
+            result_node = GenericSearch.Search(problem, "ID", True, gui=gui)
+            if result_node != None:
+                print('the depth is ',depth)
+                break
 
         if result_node != None:
             path = []

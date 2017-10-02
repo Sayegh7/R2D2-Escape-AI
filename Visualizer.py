@@ -11,7 +11,13 @@ def renderCell(img, x, y, background):
     offset = (50*x, 50*y)
     background.paste(img, offset)
 
+def refresh(state, gui):
+    renderGrid(state.grid, dimension)
+    gui.refresh()
+
 def renderGrid(grid, m, initial=False):
+    global dimension
+    dimension = m
     background = Image.new('RGBA', (m*50, m*50), (255, 255, 255, 255))
     emptyCellImg = Image.open('assets/box.png', 'r')
     rockImg = Image.open('assets/rock.png', 'r')

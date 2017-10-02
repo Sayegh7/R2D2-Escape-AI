@@ -17,11 +17,8 @@ class SearchNode():
     def expand(self, operators):
         childNodes = []
         for operator in operators:
-            (x, y, grid, max) = self.state
-            state = State(x, y, grid, max)
-            newState = nextState(state, operator);
-            newStateTuple = (newState.x, newState.y, newState.grid, newState.max)
-            newNode = SearchNode(newStateTuple, self.cost+1, self.depth+1, self, operator)
+            newState = nextState(self.state, operator);
+            newNode = SearchNode(self.state, self.cost+1, self.depth+1, self, operator)
             childNodes.append(newNode)
         return childNodes
 
@@ -258,7 +255,7 @@ def nextState(previousState, operator):
                     return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                 else:
                     # Empty above rock
-                    if (previousSdef nextState(previousState, operator):tate.grid[previousState.x-2][previousState.y]) == 0:
+                    if (previousState.grid[previousState.x-2][previousState.y]) == 0:
                         # Move rock and self up
                         newGrid[previousState.x-2][previousState.y] = 1
                         newGrid[previousState.x-1][previousState.y] = 2

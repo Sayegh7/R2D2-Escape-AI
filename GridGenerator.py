@@ -15,6 +15,7 @@ def GenGrid():
     v.renderGrid(grid, m, True)
     return grid
 
+
 def placeRock():
     placeItem(1)
 def placePad():

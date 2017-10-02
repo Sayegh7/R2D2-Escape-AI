@@ -3,20 +3,29 @@ import GridGenerator
 import SearchNode
 import GenericSearch
 
+class State():
+    def __init__(self, x, y ,grid, max):
+        self.x = x
+        self.y = y
+        self.grid = grid
+        self.max = max
+
 
 def run(gui):
         grid = GridGenerator.GenGrid()
         for x in range(len(grid)):
             for y in range(len(grid)):
                 if grid[x][y] == 2:
-                     initialState = (x, y, grid, grid.max())
+                     initialState = State(x, y, grid, grid.max())
 
         operators = ['Up', 'Down', 'Left', 'Right']
-        def goalTestFunction(self, state):
-            return (state[3] == 0)
+        def goalTestFunction(state):
+            print(state.max)
+            return (state.max == 0)
 
         problem = SearchProblem.createSearchProblem(initialState, operators, goalTestFunction)
-        result_node = GenericSearch.Search(problem, "DFS", False, gui);
+
+        result_node = GenericSearch.Search(problem, "DFS", True, gui);
 
         if result_node != None:
             path = []

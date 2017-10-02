@@ -9,7 +9,6 @@ def Search(problem, strategy, visualize, gui):
     global rockCount
     rockCount = 0
     visitedMatrices = []
-    # if strategy == "BFS":
     nodes = queue.Queue()
     (x,y,grid,max) = problem.initalState
     rockCount = np.count_nonzero(grid==1)
@@ -43,7 +42,8 @@ def Search(problem, strategy, visualize, gui):
         visitedMatrices.append(gridArray)
         Queueingfucntion(newNodes,strategy)
     return
-def Queueingfucntion(newNodes,strategy):
+
+def Queueingfunction(newNodes,strategy):
     global nodes
     if strategy == "BFS":
         while not newNodes.empty():

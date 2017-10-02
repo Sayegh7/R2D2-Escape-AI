@@ -6,8 +6,18 @@ import GenericSearch
 
 def run(gui):
         grid = GridGenerator.GenGrid()
-        problem = SearchProblem.createSearchProblem(grid)
-        result_node = GenericSearch.Search(problem, "BFS", False, gui);
+        for x in range(len(grid)):
+            for y in range(len(grid)):
+                if grid[x][y] == 2:
+                     initialState = (x, y, grid, grid.max())
+
+        operators = ['Up', 'Down', 'Left', 'Right']
+        def goalTestFunction(self, state):
+            return (state[3] == 0)
+
+        problem = SearchProblem.createSearchProblem(initialState, operators, goalTestFunction)
+        result_node = GenericSearch.Search(problem, "DFS", False, gui);
+
         if result_node != None:
             path = []
             path.append(result_node.operator)

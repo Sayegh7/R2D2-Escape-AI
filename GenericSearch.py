@@ -9,7 +9,7 @@ def Search(problem, strategy, visualize, gui):
     rockCount = 0
     visitedMatrices = []
     if strategy == "BFS":
-        nodes = queue.LifoQueue()
+        nodes = queue.Queue()
     (x,y,grid,max) = problem.initalState
     rockCount = np.count_nonzero(grid==1)
 
@@ -22,9 +22,10 @@ def Search(problem, strategy, visualize, gui):
         gui.refresh()
         gridArray = node.state[2]
         if np.count_nonzero(node.state[2]==1) != rockCount:
-            nodes = queue.LifoQueue()
+            nodes = queue.Queue()
             rockCount = np.count_nonzero(node.state[2]==1)
             nodes.put(node)
+            visitedMatrices = []
             continue;
         # visitedNodes.append((node.state[0], node.state[1], node.operator))
         if node.state[3] == 0: # GOAAAAAALLL
@@ -35,8 +36,8 @@ def Search(problem, strategy, visualize, gui):
            for matrix in visitedMatrices:
                if np.array_equal(matrix,gridArray):
                         # print (matrix)
-                        flag =True    
-           if flag == False: 
+                        flag =True
+           if flag == False:
                 nodes.put(node)
         visitedMatrices.append(gridArray)
-    return 
+    return

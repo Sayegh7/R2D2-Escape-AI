@@ -14,6 +14,5 @@ class SearchProblem():
         self.operators = operators
         self.goalTestFunction = goalTestFunction
 
-
 def createSearchProblem(initialState, operators, goalTestFunction):
     return SearchProblem(initialState, operators, goalTestFunction)

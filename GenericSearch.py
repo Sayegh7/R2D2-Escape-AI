@@ -4,7 +4,7 @@ import queue
 import Visualizer as v
 import numpy as np
 import tracking as tracker
-
+import operator
 def Search(problem, strategy, visualize, gui):
     global nodes
     global visitedStates
@@ -18,7 +18,7 @@ def Search(problem, strategy, visualize, gui):
         node = nodes.get()
         if visualize == True:
             v.refresh(node.state, gui)
-        if problem.goalTestFunction(node.state): #GOAL
+        if problem.goalTestFunction(node.state)or node.depth>max_depth: #GOAL
             return node
         childNodes = node.expand(problem.operators)
         for node in childNodes:
@@ -39,3 +39,12 @@ def Queueingfunction(newNodes,strategy):
             newNodes.put(nodes.get())
         while not newNodes.empty():
             nodes.put(newNodes.get())
+    if strategy == "UC":
+       templist = []
+       while not nodes.empty():
+           templist.append(nodes.get())
+       while not newNodes.empty():
+           templist.append(newNodes.get())
+       templist.sort(key=operator.attrgetter('depth'))
+       for node in templist:
+           nodes.put(node)

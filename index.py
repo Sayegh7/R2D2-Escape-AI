@@ -19,7 +19,7 @@ def run(gui):
 
         problem = SearchProblem.createSearchProblem(initialState, operators, goalTestFunction)
 
-        result_node = GenericSearch.Search(problem, "BFS", True, gui);
+        result_node = GenericSearch.Search(problem, "UC", True, gui);
 
         if result_node != None:
             path = []

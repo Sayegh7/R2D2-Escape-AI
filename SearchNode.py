@@ -258,7 +258,7 @@ def nextState(previousState, operator):
                     return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                 else:
                     # Empty above rock
-                    if (previousState.grid[previousState.x-2][previousState.y]) == 0:
+                    if (previousSdef nextState(previousState, operator):tate.grid[previousState.x-2][previousState.y]) == 0:
                         # Move rock and self up
                         newGrid[previousState.x-2][previousState.y] = 1
                         newGrid[previousState.x-1][previousState.y] = 2

@@ -3,12 +3,13 @@ import SearchProblem
 import queue
 import Visualizer as v
 import numpy as np
+import tracking as tracker
 def Search(problem, strategy, visualize, gui):
     global nodes
-    global visitedMatrices
+    global visitedStates
     global rockCount
     rockCount = 0
-    visitedMatrices = []
+    visitedStates = []
     nodes = queue.Queue()
     (x,y,grid,max) = problem.initalState
     rockCount = np.count_nonzero(grid==1)
@@ -33,12 +34,9 @@ def Search(problem, strategy, visualize, gui):
         childNodes = node.expand(problem.operators)
         # print (childNodes)
         for node in childNodes:
-           for matrix in visitedMatrices:
-               if np.array_equal(matrix,gridArray):
-                        # print (matrix)
-                        flag =True
-           if flag == False:
+            if (tracker.stateExist(node.state,visitedStates)==False):
                 newNodes.put(node)
+                visitedStates.appand(node.state)
         visitedMatrices.append(gridArray)
         Queueingfucntion(newNodes,strategy)
     return

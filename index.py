@@ -7,7 +7,7 @@ import GenericSearch
 def run(gui):
         grid = GridGenerator.GenGrid()
         problem = SearchProblem.createSearchProblem(grid)
-        result_node = GenericSearch.Search(problem, "DFS", False, gui);
+        result_node = GenericSearch.Search(problem, "BFS", False, gui);
         if result_node != None:
             path = []
             path.append(result_node.operator)

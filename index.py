@@ -17,7 +17,6 @@ def run(gui):
 
         problem = SearchProblem.createSearchProblem(initialState, operators, goalTestFunction)
 
-        # result_node = GenericSearch.Search(problem, "UC", True, gui=gui);
         for depth in range(99999999):
             print ('the actual depth',depth)
             GenericSearch.max_depth = depth
@@ -42,4 +41,3 @@ def run(gui):
             print (print_path)
         else:
             print("Found no solution")
-# run(None)

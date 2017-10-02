@@ -1,5 +1,4 @@
 import numpy as np
-import StateSpace
 class SearchProblem():
     """docstring for SearchProblem."""
     def __init__(self, initialState, operators, goalTestFunction):

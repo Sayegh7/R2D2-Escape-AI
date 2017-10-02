@@ -34,4 +34,3 @@ def run(gui):
             print (print_path)
         else:
             print("Found no solution")
-# run(None)

@@ -4,6 +4,26 @@ import SearchNode
 from State import State
 import GenericSearch
 import numpy as np
+import heuristics
+from termcolor import colored
+
+def output(result_node, strategy):
+    if result_node != None:
+        path = []
+        print_path = []
+        path.append(result_node.operator)
+        parent = result_node.parent
+        while parent != None:
+            if parent.operator != None:
+                path.append(parent.operator)
+            parent = parent.parent
+        print("Solution:")
+        for value in reversed(path):
+            print_path.append(value)
+        print (strategy, colored(print_path, 'blue'))
+    else:
+        return
+
 def run(gui):
         grid = GridGenerator.GenGrid()
         r2d2 = np.argwhere(grid==2)
@@ -13,30 +33,17 @@ def run(gui):
         def goalTestFunction(state):
             return (state.max == 0)
 
-        problem = SearchProblem.createSearchProblem(initialState, operators, goalTestFunction)
-        result_node = GenericSearch.Search(problem, "BFS", True, gui=gui)
+        def pathCostFunction(node):
+            return heuristics.HeuristicOne(node.state.grid)
 
-        # for depth in range(99999999):
-        #     print ('the actual depth',depth)
-        #     GenericSearch.max_depth = depth
-        #     print(GenericSearch.max_depth)
-        #     result_node = GenericSearch.Search(problem, "ID", True, gui=gui)
-        #     if result_node != None:
-        #         print('the depth is ',depth)
-        #         break
-
-        if result_node != None:
-            path = []
-            print_path = []
-            path.append(result_node.operator)
-            parent = result_node.parent
-            while parent != None:
-                if parent.operator != None:
-                    path.append(parent.operator)
-                parent = parent.parent
-            print("Solution:")
-            for value in reversed(path):
-                print_path.append(value)
-            print (print_path)
-        else:
-            print("Found no solution")
+        problem = SearchProblem.createSearchProblem(initialState, operators, goalTestFunction, pathCostFunction)
+        for strategy in ["BFS", "DFS", "UC", "G", "A*"]:
+            result_node = GenericSearch.Search(problem, strategy, True, gui=gui)
+            output(result_node, strategy)
+        for depth in range(99999999):
+            GenericSearch.max_depth = depth
+            result_node = GenericSearch.Search(problem, "ID", True, gui=gui)
+            output(result_node, "ID")
+            if result_node != None:
+                print('the depth is ',depth)
+                break

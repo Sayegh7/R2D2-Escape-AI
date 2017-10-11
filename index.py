@@ -3,13 +3,11 @@ import GridGenerator
 import SearchNode
 from State import State
 import GenericSearch
-
+import numpy as np
 def run(gui):
         grid = GridGenerator.GenGrid()
-        for x in range(len(grid)):
-            for y in range(len(grid)):
-                if grid[x][y] == 2:
-                     initialState = SearchNode.State(x, y, grid, grid.max())
+        r2d2 = np.argwhere(grid==2)
+        initialState = SearchNode.State(r2d2[0][0], r2d2[0][1], grid, grid.max())
 
         operators = ['Up', 'Down', 'Left', 'Right']
         def goalTestFunction(state):

@@ -27,10 +27,10 @@ def Search(problem, strategy, visualize, gui=None):
             if (tracker.stateExist(node.state,visitedStates)==False):
                 newNodes.put(node)
                 visitedStates.append(node.state)
-        Queueingfunction(newNodes,strategy)
+        Queueingfunction(newNodes,strategy, problem)
     return
-
-def Queueingfunction(newNodes,strategy):
+# problem.pathCostFunction(node)
+def Queueingfunction(newNodes,strategy, problem):
     global nodes
     global max_depth
     if strategy == "BFS":
@@ -51,9 +51,49 @@ def Queueingfunction(newNodes,strategy):
        for node in templist:
            nodes.put(node)
     if strategy == "ID":
-                  while not nodes.empty():
-                      newNodes.put(nodes.get())
-                  while not newNodes.empty():
-                      tempNode = newNodes.get()
-                      if tempNode.depth<=max_depth:
-                          nodes.put(tempNode)
+      while not nodes.empty():
+          newNodes.put(nodes.get())
+      while not newNodes.empty():
+          tempNode = newNodes.get()
+          if tempNode.depth<=max_depth:
+              nodes.put(tempNode)
+    if strategy == "G":
+        costs = []
+        nodeList = []
+        while not nodes.empty():
+            one_node = nodes.get()
+            nodeList.append(one_node)
+        while not newNodes.empty():
+            one_node = newNodes.get()
+            nodeList.append(one_node)
+            # newNodes.put(one_node)
+        for nodeInArray in nodeList:
+            costs.append(problem.pathCostFunction(nodeInArray))
+        order = np.argsort(costs)
+        ordered_nodes = []
+        for index in range(len(order)):
+            ordered_nodes.insert(order[index], nodeList[index])
+        # for index, el in order:
+            # ordered_nodes.insert(el, nodeList[index])
+        for node in ordered_nodes:
+            nodes.put(node)
+    if strategy == "A*":
+        costs = []
+        nodeList = []
+        while not nodes.empty():
+            one_node = nodes.get()
+            nodeList.append(one_node)
+        while not newNodes.empty():
+            one_node = newNodes.get()
+            nodeList.append(one_node)
+            # newNodes.put(one_node)
+        for nodeInArray in nodeList:
+            costs.append(problem.pathCostFunction(nodeInArray)+nodeInArray.cost)
+        order = np.argsort(costs)
+        ordered_nodes = []
+        for index in range(len(order)):
+            ordered_nodes.insert(order[index], nodeList[index])
+        # for index, el in order:
+            # ordered_nodes.insert(el, nodeList[index])
+        for node in ordered_nodes:
+            nodes.put(node)

@@ -20,7 +20,7 @@ def output(result_node, strategy):
         print("Solution:")
         for value in reversed(path):
             print_path.append(value)
-        print (strategy, colored(print_path, 'blue'))
+        print (strategy, colored(print_path, 'yellow'))
     else:
         return
 

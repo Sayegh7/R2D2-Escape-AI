@@ -8,7 +8,7 @@ from State import State
 from SearchNode import SearchNode
 
 max_depth = 9999999
-def Search(problem, strategy, visualize, gui=None):
+def Search(problem, strategy):
     global nodes
     global visitedStates
     visitedStates = []
@@ -18,8 +18,6 @@ def Search(problem, strategy, visualize, gui=None):
     while nodes.empty() == False:
         newNodes =queue.Queue()
         node = nodes.get()
-        if visualize == True:
-            v.refresh(node.state, gui)
         if problem.goalTestFunction(node.state):#GOAL
             return node
         childNodes = node.expand(problem.operators)
@@ -29,7 +27,6 @@ def Search(problem, strategy, visualize, gui=None):
                 visitedStates.append(node.state)
         Queueingfunction(newNodes,strategy, problem)
     return
-# problem.pathCostFunction(node)
 def Queueingfunction(newNodes,strategy, problem):
     global nodes
     global max_depth
@@ -66,15 +63,12 @@ def Queueingfunction(newNodes,strategy, problem):
         while not newNodes.empty():
             one_node = newNodes.get()
             nodeList.append(one_node)
-            # newNodes.put(one_node)
         for nodeInArray in nodeList:
             costs.append(problem.pathCostFunction(nodeInArray))
         order = np.argsort(costs)
         ordered_nodes = []
         for index in range(len(order)):
             ordered_nodes.insert(order[index], nodeList[index])
-        # for index, el in order:
-            # ordered_nodes.insert(el, nodeList[index])
         for node in ordered_nodes:
             nodes.put(node)
     if strategy == "A*":
@@ -86,14 +80,11 @@ def Queueingfunction(newNodes,strategy, problem):
         while not newNodes.empty():
             one_node = newNodes.get()
             nodeList.append(one_node)
-            # newNodes.put(one_node)
         for nodeInArray in nodeList:
             costs.append(problem.pathCostFunction(nodeInArray)+nodeInArray.cost)
         order = np.argsort(costs)
         ordered_nodes = []
         for index in range(len(order)):
             ordered_nodes.insert(order[index], nodeList[index])
-        # for index, el in order:
-            # ordered_nodes.insert(el, nodeList[index])
         for node in ordered_nodes:
             nodes.put(node)

@@ -22,7 +22,8 @@ def renderGrid(grid, m, initial=False):
     emptyCellImg = Image.open('assets/box.png', 'r')
     rockImg = Image.open('assets/rock.png', 'r')
     r2d2Img = Image.open('assets/r2d2.jpg', 'r')
-    padImg = Image.open('assets/pad.jpeg', 'r')
+    padImg = Image.open('assets/pad.png', 'r')
+    fullpadImg = Image.open('assets/fullpad.png', 'r')
     teleporterImg = Image.open('assets/teleporter.png', 'r')
 
     for x in range(m):
@@ -33,9 +34,10 @@ def renderGrid(grid, m, initial=False):
                 renderCell(rockImg, x, y, background)
             if grid[x][y] == 2:
                 renderCell(r2d2Img, x, y, background)
-                # print('R2D2 is at', x, y)
             if grid[x][y] == -2:
                 renderCell(teleporterImg, x, y, background)
+            if grid[x][y] == -3:
+                renderCell(fullpadImg, x, y, background)
             if grid[x][y] == 0:
                 renderCell(emptyCellImg, x, y, background)
     # qimg = toQImage(background)

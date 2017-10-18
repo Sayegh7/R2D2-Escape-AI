@@ -9,9 +9,19 @@ from termcolor import colored
 from GUI import App
 import sys
 from PyQt5.QtWidgets import (QApplication)
-
 GUIResults = {'BFS': [], 'DFS': [], 'UC': [], 'ID': [], 'A*': [], 'G': []}
+
+
+# Parameters
+# m refers to the size of the grid
 m = 5
+# Visualize flag
+visualize = True
+# Heuristic function choice
+h = 1
+
+
+
 def runGUI(results):
     app = QApplication(sys.argv)
     ex = App(results, m)
@@ -55,7 +65,11 @@ def run(visualize):
             return (state.max == 0)
 
         def pathCostFunction(node):
-            return heuristics.HeuristicOne(node.state.grid)
+            if h == 1:
+                return heuristics.HeuristicOne(node.state.grid)
+            elif h == 2:
+                return heuristics.HeuristicTwo(node.state.grid)
+
 
         problem = SearchProblem.createSearchProblem(initialState, operators, goalTestFunction, pathCostFunction)
         for strategy in ["BFS", "DFS", "UC", "G", "A*"]:
@@ -70,5 +84,5 @@ def run(visualize):
                 break
         if visualize == True:
             runGUI(GUIResults)
-run(True)
+run(visualize)
 sys.exit(0)

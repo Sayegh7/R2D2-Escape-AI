@@ -1,7 +1,7 @@
 import numpy as np
 import Visualizer as v
 
-# ROCKS = 1, PADS = -1, R2D2 = 2, TELEPORTER = -2, FULL PAD = -3
+# ROCKS = 1, PADS = -1, R2D2 = 2, TELEPORTER = -2, FULL PAD = -3, IMMOVABLE = -4
 m = 0
 grid = []
 def GenGrid(size):
@@ -15,6 +15,8 @@ def GenGrid(size):
     for n in range(rocks):
         placeRock()
         placePad()
+    for n in range(round(rocks/2)):
+        placeImmovable()
     placeTeleporter()
     placeR2D2()
     v.renderGrid(grid, m, True)
@@ -25,6 +27,8 @@ def placeRock():
     placeItem(1)
 def placePad():
     placeItem(-1)
+def placeImmovable():
+    placeItem(-4)
 def placeTeleporter():
     placeItem(-2)
 def placeR2D2():

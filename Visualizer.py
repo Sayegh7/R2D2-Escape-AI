@@ -25,6 +25,7 @@ def renderGrid(grid, m, initial=False):
     padImg = Image.open('assets/pad.png', 'r')
     fullpadImg = Image.open('assets/fullpad.png', 'r')
     teleporterImg = Image.open('assets/teleporter.png', 'r')
+    immovableImg = Image.open('assets/immovable.png', 'r')
 
     for x in range(m):
         for y in range(m):
@@ -40,16 +41,12 @@ def renderGrid(grid, m, initial=False):
                 renderCell(fullpadImg, x, y, background)
             if grid[x][y] == 0:
                 renderCell(emptyCellImg, x, y, background)
-    # qimg = toQImage(background)
-    # print (qimg)
-    # qim = ImageQt(background)
-    # pix = QtGui.QPixmap.fromImage(qim)
+            if grid[x][y] == -4:
+                renderCell(immovableImg, x, y, background)
     if initial == True:
         background.save('initial.png')
 
     background.save('out.png')
-
-    # background.show()
 
 
 def toQImage(im, copy=False):

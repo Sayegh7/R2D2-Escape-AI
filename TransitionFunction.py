@@ -27,8 +27,8 @@ def next(previousState, operator):
                     # Not all pads are active. Do nothing.
                     return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
-            # Pad in the way
-            if (previousState.grid[previousState.x][previousState.y-1]) == -1 or (previousState.grid[previousState.x][previousState.y-1]) == -3:
+            # Pad or immovable in the way
+            if (previousState.grid[previousState.x][previousState.y-1]) == -1 or            (previousState.grid[previousState.x][previousState.y-2]) == -4 or (previousState.grid[previousState.x][previousState.y-1]) == -3:
                 return State(previousState.x, previousState.y, previousState.grid, previousState.max)
             # No obstacles in the way
             if (previousState.grid[previousState.x][previousState.y-1]) == 0:
@@ -52,8 +52,8 @@ def next(previousState, operator):
                         newGrid[previousState.x][previousState.y] = 0
                         newY -= 1
                         return State(newX, newY, newGrid, newMax)
-                    # Rock or teleporter or full pad above rock
-                    if (previousState.grid[previousState.x][previousState.y-2]) == 1 or (previousState.grid[previousState.x][previousState.y-2]) == -2 or (previousState.grid[previousState.x][previousState.y-2]) == -3 :
+                    # Rock or teleporter or immovable or full pad above rock
+                    if (previousState.grid[previousState.x][previousState.y-2]) == 1 or                    (previousState.grid[previousState.x][previousState.y-2]) == -4 or (previousState.grid[previousState.x][previousState.y-2]) == -2 or (previousState.grid[previousState.x][previousState.y-2]) == -3 :
                         # Do nothing
                         return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                     # Pad above rock
@@ -90,7 +90,7 @@ def next(previousState, operator):
                     return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
             # Pad in the way
-            if (previousState.grid[previousState.x][previousState.y+1]) == -1 or (previousState.grid[previousState.x][previousState.y+1]) == -3:
+            if (previousState.grid[previousState.x][previousState.y+1]) == -1 or            (previousState.grid[previousState.x][previousState.y+1]) == -4 or (previousState.grid[previousState.x][previousState.y+1]) == -3:
                 return State(previousState.x, previousState.y, previousState.grid, previousState.max)
             # No obstacles in the way
             if (previousState.grid[previousState.x][previousState.y+1]) == 0:
@@ -115,7 +115,7 @@ def next(previousState, operator):
                         newY += 1
                         return State(newX, newY, newGrid, newMax)
                     # Rock or teleporter or full pad above rock
-                    if (previousState.grid[previousState.x][previousState.y+2]) == 1 or (previousState.grid[previousState.x][previousState.y+2]) == -2 or (previousState.grid[previousState.x][previousState.y+2]) == -3 :
+                    if (previousState.grid[previousState.x][previousState.y+2]) == 1 or (previousState.grid[previousState.x][previousState.y+2]) == -2 or                    (previousState.grid[previousState.x][previousState.y+2]) == -4 or (previousState.grid[previousState.x][previousState.y+2]) == -3 :
                         # Do nothing
                         return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                     # Pad above rock
@@ -151,7 +151,7 @@ def next(previousState, operator):
                     return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
             # Pad in the way
-            if (previousState.grid[previousState.x+1][previousState.y]) == -1 or (previousState.grid[previousState.x+1][previousState.y]) == -3:
+            if (previousState.grid[previousState.x+1][previousState.y]) == -1 or            (previousState.grid[previousState.x+1][previousState.y]) == -4 or (previousState.grid[previousState.x+1][previousState.y]) == -3:
                 return State(previousState.x, previousState.y, previousState.grid, previousState.max)
             # No obstacles in the way
             if (previousState.grid[previousState.x+1][previousState.y]) == 0:
@@ -176,7 +176,7 @@ def next(previousState, operator):
                         newX += 1
                         return State(newX, newY, newGrid, newMax)
                     # Rock or teleporter or full pad above rock
-                    if (previousState.grid[previousState.x+2][previousState.y]) == 1 or (previousState.grid[previousState.x+2][previousState.y]) == -2 or (previousState.grid[previousState.x+2][previousState.y]) == -3 :
+                    if (previousState.grid[previousState.x+2][previousState.y]) == 1 or (previousState.grid[previousState.x+2][previousState.y]) == -2 or                    (previousState.grid[previousState.x+2][previousState.y]) == -4 or (previousState.grid[previousState.x+2][previousState.y]) == -3 :
                         # Do nothing
                         return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                     # Pad above rock
@@ -215,7 +215,7 @@ def next(previousState, operator):
                     return State(previousState.x, previousState.y, previousState.grid, previousState.max)
 
             # Pad in the way
-            if (previousState.grid[previousState.x-1][previousState.y]) == -1 or (previousState.grid[previousState.x-1][previousState.y]) == -3:
+            if (previousState.grid[previousState.x-1][previousState.y]) == -1 or            (previousState.grid[previousState.x-1][previousState.y]) == -4 or (previousState.grid[previousState.x-1][previousState.y]) == -3:
                 return State(previousState.x, previousState.y, previousState.grid, previousState.max)
             # No obstacles in the way
             if (previousState.grid[previousState.x-1][previousState.y]) == 0:
@@ -240,7 +240,7 @@ def next(previousState, operator):
                         newX -= 1
                         return State(newX, newY, newGrid, newMax)
                     # Rock or teleporter or full pad above rock
-                    if (previousState.grid[previousState.x-2][previousState.y]) == 1 or (previousState.grid[previousState.x-2][previousState.y]) == -2 or (previousState.grid[previousState.x-2][previousState.y]) == -3 :
+                    if (previousState.grid[previousState.x-2][previousState.y]) == 1 or                    (previousState.grid[previousState.x-2][previousState.y]) == -4 or (previousState.grid[previousState.x-2][previousState.y]) == -2 or (previousState.grid[previousState.x-2][previousState.y]) == -3 :
                         # Do nothing
                         return State(previousState.x, previousState.y, previousState.grid, previousState.max)
                     # Pad above rock

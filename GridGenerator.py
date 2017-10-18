@@ -8,10 +8,9 @@ def GenGrid(size):
     global m
     m = size
     global grid
+    grid = np.zeros((size, size))
 
-    grid = np.zeros((m, m))
-
-    rocks = np.random.randint(m)
+    rocks = np.random.randint(round(size/2))
     for n in range(rocks):
         placeRock()
         placePad()
@@ -19,7 +18,7 @@ def GenGrid(size):
         placeImmovable()
     placeTeleporter()
     placeR2D2()
-    v.renderGrid(grid, m, True)
+    v.renderGrid(grid, size, True)
     return grid
 
 
@@ -35,15 +34,13 @@ def placeR2D2():
     placeItem(2)
 
 def placeItem(itemCode):
-    placed = False
-
-    while placed == False:
+    while True:
         x = np.random.randint(m-1)
         y = np.random.randint(m-1)
         if y == 0 or y == m-1 or x == 0 or x == m-1:
             continue
         if grid[x][y] != 0:
             continue
-        else:
+        if grid[x][y] == 0:
             grid[x][y] = itemCode
-            placed = True
+            return

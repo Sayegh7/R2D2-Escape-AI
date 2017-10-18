@@ -45,6 +45,7 @@ def renderGrid(grid, m, initial=False):
                 renderCell(immovableImg, x, y, background)
     if initial == True:
         background.save('initial.png')
+        background.show()
 
     background.save('out.png')
 

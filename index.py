@@ -55,7 +55,6 @@ def output(result_node, strategy):
         return
 
 def run(visualize):
-        print (colored("Thinking", 'red'))
         grid = GridGenerator.GenGrid(m)
         r2d2 = np.argwhere(grid==2)
         global initialState
@@ -73,6 +72,8 @@ def run(visualize):
 
 
         problem = SearchProblem.createSearchProblem(initialState, operators, goalTestFunction, pathCostFunction)
+        print (colored("Thinking", 'red'))
+
         for strategy in ["BFS", "DFS", "UC", "G", "A*"]:
             result_node = GenericSearch.Search(problem, strategy)
             output(result_node, strategy)

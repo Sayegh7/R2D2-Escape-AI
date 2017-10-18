@@ -21,7 +21,7 @@ visualize = True
 h = 1
 
 
-
+initialState = None
 def runGUI(results):
     app = QApplication(sys.argv)
     ex = App(results, m)
@@ -33,7 +33,6 @@ def output(result_node, strategy):
         states = []
         print_path = []
         states_path = []
-        path.append(result_node.operator)
         parent = result_node.parent
         while parent != None:
             if parent.operator != None:
@@ -45,6 +44,7 @@ def output(result_node, strategy):
             print_path.append(value)
         print_path.append(result_node.operator)
 
+        GUIResults[strategy].append(initialState.grid)
         for value in reversed(states):
             GUIResults[strategy].append(value)
         GUIResults[strategy].append(result_node.state.grid)
@@ -58,6 +58,7 @@ def run(visualize):
         print (colored("Thinking", 'red'))
         grid = GridGenerator.GenGrid(m)
         r2d2 = np.argwhere(grid==2)
+        global initialState
         initialState = SearchNode.State(r2d2[0][0], r2d2[0][1], grid, grid.max())
 
         operators = ['Up', 'Down', 'Left', 'Right']

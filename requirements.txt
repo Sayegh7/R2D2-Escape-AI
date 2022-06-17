@@ -1,5 +1,5 @@
 image==1.5.15
-numpy==1.13.1
+numpy==1.21.0
 PyQt5==5.9
 sip==4.19.3
 termcolor==1.1.0
